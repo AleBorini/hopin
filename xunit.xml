@@ -1,0 +1,7 @@
+<testsuite name="Mocha Tests" tests="3" failures="0" errors="1" skipped="0" timestamp="Fri, 22 Jan 2021 15:53:17 GMT" time="39.69">
+<testcase classname="Jenkins Test Suite" name="Test 1" time="4.839"/>
+<testcase classname="Jenkins Test Suite" name="Test 2" time="14.12"><failure>Timed out retrying after 10000ms: Expected to find element: &#x60;[class=&#x22;m2l-sm111&#x22;]&#x60;, but never found it.
+AssertionError: Timed out retrying after 10000ms: Expected to find element: &#x60;[class=&#x22;m2l-sm111&#x22;]&#x60;, but never found it.
+    at Context.eval (https://www.faceit.com/__cypress/tests?p=cypress\integration\com.faceit.test\Test.js:125:8)</failure></testcase>
+<testcase classname="Jenkins Test Suite" name="Test 3" time="5.009"/>
+</testsuite>

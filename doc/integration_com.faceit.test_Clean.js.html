@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: integration/com.faceit.test/Clean.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: integration/com.faceit.test/Clean.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/// &lt;reference types="Cypress" />
+
+import "cypress-iframe"
+
+/**
+ * @module Clean
+ * @description This test suite will contains all the tests that are used to clean the environment
+ * from useless teams, hubs and championships.
+ * @author Alessandro Follo Borini
+ * @see &lt;a href="https://faceit.atlassian.net/wiki/spaces/QA/pages/1493368852/Faceit+Automation"> Confluence Documentation&lt;/a>
+ *
+ */
+
+describe('Clean Suite', function () {
+
+  /**
+   * @Class Premade Team delete all
+   * @Description The test will clean the environment from
+   * all the premade teams that are not in use.
+   */
+
+  it('Premade Team Delete All', function () {
+
+    cy.loginAuth(Cypress.env("url"), Cypress.env("frontend_client_id"),
+        Cypress.env("frontend_client_secret"), Cypress.env("api_url"),
+        Cypress.env("automation_test_secret"),
+        Cypress.env("email"), Cypress.env("user_password_autotest"));
+    cy.loginValidate();
+    cy.get('[ng-click="vm.openCloseSection(\'teams\')"]').click();
+
+    cy.get('[name="team.name"]')
+    .each(($el) => {
+      if ($el.text() === 'TeamTest') {
+        cy.log("There are no teams to delete here")
+      } else {
+        cy.wrap($el).click();
+        cy.get('.subpage-nav__list__link > span').click();
+        cy.get('.users-list > :nth-child(1)').scrollIntoView()
+        .should('be.visible');
+        cy.elementExistClick('[ng-click*="vm.remove"]');
+        cy.get('.text-right > .btn').click();
+        cy.get('[ng-click="close()"]').click();
+        cy.url().should('not.include', 'teams');
+        cy.log("One team has been deleted")
+        cy.wait(1500);
+      }
+    })
+
+  })
+
+  /**
+   * @Class Hubs Leave All User 2
+   * @Description The test will clean the environment
+   * from all not necessary hubs using user 2
+   */
+
+  it('Hubs Leave All User 2', function () {
+    const user2 = "autofaceit6"
+    cy.loginAuth(Cypress.env("url"), Cypress.env("frontend_client_id"),
+        Cypress.env("frontend_client_secret"), Cypress.env("api_url"),
+        Cypress.env("automation_test_secret"),
+        user2 + "@faceit.com", Cypress.env("user_password_autotest"));
+    cy.loginValidate();
+
+    cy.get('[ng-click*="hubs"]').click();
+    cy.get('[ng-bind*="hub.name"]')
+    .each(($el) => {
+      if ($el.text() === 'TestHub') {
+        cy.log("There are no hubs to delete here")
+      } else {
+        cy.get('[ng-bind*="vm.hub.name"]').eq(0).click();
+        cy.get('[popover-is-open*="MenuOpen"]').trigger('mouseover');
+        cy.xpath("//*[contains(text(),'Leave hub')]").click();
+        cy.get('[class*="btn btn-primary btn"]').click();
+        cy.get('[class="championship__title"]').should('be.visible');
+        cy.wait(1500);
+      }
+    })
+  })
+
+  /**
+   * @Class Hubs delete all
+   * @Description The test will clean the environment from
+   * all the premade teams that are not in use.
+   */
+
+  it('Hubs Delete All', function () {
+
+    cy.loginAuth(Cypress.env("url"), Cypress.env("frontend_client_id"),
+        Cypress.env("frontend_client_secret"), Cypress.env("api_url"),
+        Cypress.env("automation_test_secret"),
+        Cypress.env("email"), Cypress.env("user_password_autotest"));
+    cy.loginValidate();
+
+    cy.get('[ng-click*="hubs"]').click();
+    cy.get('[ng-bind*="hub.name"]')
+    .each(($el) => {
+      if ($el.text() === 'TestHub') {
+        cy.log("There are no hubs to delete here")
+      } else {
+        cy.wrap($el).click();
+        cy.xpath("//*[contains(text(),'Rules')]").should('be.visible');
+        cy.wait(1000);
+        cy.elementExistClick('[class="fi-navbar__drawer__button"]');
+        cy.elementExistClick(
+            '[class*="icon-ic_navigation_settings"]:nth-last-of-type(1)');
+        cy.get("[class='btn--text text-danger text-initial']").click();
+        cy.get("button[class='btn btn-primary btn-min-width']").click();
+        cy.url().should('not.include', 'hub')
+        cy.xpath("//*[contains(text(),'steps')]").should("be.visible");
+        cy.xpath(
+            "//*[@class='fi-navbar__main__item']//*[contains(text(),'Play')]")
+        .click({force: true});
+
+      }
+    })
+  })
+
+  /**
+   * @Class Preamde Team Fix User 1
+   * @Description The test will clean the environment fixing
+   * problem there on the test premade team from user 1 pov.
+   */
+
+  it('Premade Team Fix User 1', function () {
+
+    cy.loginAuth(Cypress.env("url"), Cypress.env("frontend_client_id"),
+        Cypress.env("frontend_client_secret"), Cypress.env("api_url"),
+        Cypress.env("automation_test_secret"),
+        Cypress.env("email"), Cypress.env("user_password_autotest"));
+    cy.loginValidate();
+    cy.get('[ng-click="vm.openCloseSection(\'teams\')"]').click();
+
+    cy.get('[name="team.name"]')
+    .each(($el) => {
+      if ($el.text() === 'TeamTest') {
+        cy.wrap($el).click();
+      }
+    })
+    cy.get('.subpage-nav__list__link > span').click();
+    cy.elementExistClick('[ng-click*="demoteMember"]');
+    cy.get('[ng-click*="demoteMember"]').should('not.exist');
+
+  })
+
+  /**
+   * @Class Preamde Team Fix User 1
+   * @Description The test will clean the environment fixing
+   * problem there on the test premade team from user 1 pov.
+   */
+
+  it('Premade Team Fix User 2', function () {
+    const user2 = "autofaceit6"
+    cy.loginAuth(Cypress.env("url"), Cypress.env("frontend_client_id"),
+        Cypress.env("frontend_client_secret"), Cypress.env("api_url"),
+        Cypress.env("automation_test_secret"),
+        user2 + "@faceit.com", Cypress.env("user_password_autotest"));
+    cy.loginValidate();
+
+    cy.get('[ng-click="vm.openCloseSection(\'teams\')"]').click();
+    cy.get('[name="team.name"]')
+    .each(($el) => {
+      if ($el.text() === 'TeamTest') {
+        cy.wrap($el).click();
+      }
+    })
+    cy.get('[class="users-list__item flex-center-spaced"]').should(
+        'be.visible');
+    cy.elementExistClick('.subpage-nav__list__link > span');
+    cy.elementExistClick('[ng-click*="vm.promoteMember"]');
+    cy.elementExistClick('[class*="btn btn-primary"]');
+    cy.wait(500);
+    cy.elementExistClick('[ng-click*="vm.demoteMember"]');
+    cy.get('[ng-click*="vm.demoteMember"]').should('not.exist');
+    cy.log("User 1 promoted to admin correctly");
+
+  })
+})
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">HOME</a></h2><h3>Suites List</h3><ul><li><a href="module-Clean.html">Clean</a></li><li><a href="module-Custom.html">Custom</a></li><li><a href="module-TeamBlack.html">TeamBlack</a></li><li><a href="module-TeamBlue.html">TeamBlue</a></li><li><a href="module-TeamCopper.html">TeamCopper</a></li><li><a href="module-TeamCore.html">TeamCore</a></li><li><a href="module-Test.html">Test</a></li></ul><h3>Tests List</h3><ul><li><a href="module-Clean-Hubs%2520delete%2520all.html">Hubs delete all</a></li><li><a href="module-Clean-Hubs%2520Leave%2520All%2520User%25202.html">Hubs Leave All User 2</a></li><li><a href="module-Clean-Preamde%252520Team%252520Fix%252520User%2525201.html">Preamde Team Fix User 1</a></li><li><a href="module-Clean-Premade%2520Team%2520delete%2520all.html">Premade Team delete all</a></li><li><a href="module-TeamBlack-Championship%2520Queue%2520Join%2520Push.html">Championship Queue Join Push</a></li><li><a href="module-TeamBlack-Championship%2520Queue%2520Status%2520Push.html">Championship Queue Status Push</a></li><li><a href="module-TeamBlack-Championship%2520Update%2520Push.html">Championship Update Push</a></li><li><a href="module-TeamBlack-Hub%2520Details%2520Push.html">Hub Details Push</a></li><li><a href="module-TeamBlack-Hub%2520Join%2520Push.html">Hub Join Push</a></li><li><a href="module-TeamBlack-Hub%2520Queue%2520Push.html">Hub Queue Push</a></li><li><a href="module-TeamBlack-Premade%2520Team%2520Create%2520Push.html">Premade Team Create Push</a></li><li><a href="module-TeamBlack-Premade%2520Team%2520Update%2520Push.html">Premade Team Update Push</a></li><li><a href="module-TeamBlue-Send%2520Chat%2520Message.html">Send Chat Message</a></li><li><a href="module-TeamBlue-Send%2520Emoji%2520Message.html">Send Emoji Message</a></li><li><a href="module-TeamCopper-Championship%2520Create.html">Championship Create</a></li><li><a href="module-TeamCopper-Championship%2520Update.html">Championship Update</a></li><li><a href="module-TeamCopper-Create%2520Hub.html">Create Hub</a></li><li><a href="module-TeamCopper-Create%2520Hub%2520Queue.html">Create Hub Queue</a></li><li><a href="module-TeamCopper-Hub%2520Application%2520Accept_Reject.html">Hub Application Accept/Reject</a></li><li><a href="module-TeamCopper-Hub%2520Application%2520Join.html">Hub Application Join</a></li><li><a href="module-TeamCopper-Hub%2520Change%2520Details.html">Hub Change Details</a></li><li><a href="module-TeamCopper-Hub%2520Chat%2520Emoji.html">Hub Chat Emoji</a></li><li><a href="module-TeamCopper-Hub%2520Chat%2520Message.html">Hub Chat Message</a></li><li><a href="module-TeamCopper-Hub%2520Invite%2520Friend.html">Hub Invite Friend</a></li><li><a href="module-TeamCopper-Hub%2520Invite%2520Link.html">Hub Invite Link</a></li><li><a href="module-TeamCopper-Hub%2520Leaderboard%2520All%2520Time%2520Page.html">Hub Leaderboard All Time Page</a></li><li><a href="module-TeamCopper-Hub%2520Leaderboard%2520Season%2520Page.html">Hub Leaderboard Season Page</a></li><li><a href="module-TeamCopper-Hub%2520Matches%2520Page.html">Hub Matches Page</a></li><li><a href="module-TeamCopper-Hub%2520Members%2520Page.html">Hub Members Page</a></li><li><a href="module-TeamCopper-Hub%2520Rules%2520Page.html">Hub Rules Page</a></li><li><a href="module-TeamCopper-Hub%2520Stats%2520Page.html">Hub Stats Page</a></li><li><a href="module-TeamCopper-Organizer%2520Donate.html">Organizer Donate</a></li><li><a href="module-TeamCopper-Organizer%2520Follow.html">Organizer Follow</a></li><li><a href="module-TeamCore-Premade%2520Team%2520Create.html">Premade Team Create</a></li><li><a href="module-TeamCore-Premade%2520Team%2520Invite.html">Premade Team Invite</a></li><li><a href="module-TeamCore-Premade%2520Team%2520Promote%2520To%2520Admin.html">Premade Team Promote To Admin</a></li><li><a href="module-TeamCore-Premade%2520Team%2520Promote%2520To%2520Captain.html">Premade Team Promote To Captain</a></li><li><a href="module-TeamCore-Premade%2520Team%2520Update%2520Details.html">Premade Team Update Details</a></li><li><a href="module-TeamCore-Premade%2520Team%2520Upload%2520Images.html">Premade Team Upload Images</a></li><li><a href="module-Test-Test%25201.html">Test 1</a></li><li><a href="module-Test-Test%25202.html">Test 2</a></li><li><a href="module-Test-Test%25203.html">Test 3</a></li></ul><h3>Commands</h3><ul><li><a href="global.html#login()">login()</a></li><li><a href="global.html#loginAuth()">loginAuth()</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Feb 23 2021 16:09:49 GMT+0000 (Greenwich Mean Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

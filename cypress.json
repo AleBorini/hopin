@@ -1,0 +1,30 @@
+{
+  "defaultCommandTimeout": 15000,
+  "pageLoadTimeout": 60000,
+  "animationDistanceThreshold": 5,
+  "waitForAnimations": true,
+  "viewportHeight": 1080,
+  "viewportWidth": 1900,
+  "chromeWebSecurity": false,
+  "videoCompression": 0,
+  "supportFile": "./cypress/support/com.faceit.index/index.js",
+  "modifyObstructiveCode": false,
+  "retries": 1,
+  "ignoreTestFiles": "**/com.faceit.test/ignoredTestFiles/*.js",
+  "watchForFileChanges":false,
+
+
+  "env": {
+
+    "name": "AutoFaceit5",
+    "email": "autofaceit5@faceit.com"
+
+  },
+  "reporter": "cypress-multi-reporters",
+  "reporterOptions": {
+    "configFile": "reporter-config.json"
+  },
+
+  "projectId": "h5d2c6"
+
+}
