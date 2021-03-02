@@ -10,7 +10,7 @@
     "combine-reports": "npx mochawesome-merge cypress/reports/mocha/*.json -o cypress/reports/mochaCombined/report.json",
     "generate-report": "npx marge cypress/reports/mochaCombined/report.json -f report -o cypress/reports/mochaHtml --inline",
     "posttest": "npm run combine-reports && npm run generate-report",
-    "follo": "npm run pretest && (npx cypress run --record --key 7592eab4-ff2a-417d-a758-8ed8b8de5908 --spec cypress/integration/com.hopin.test/hopin.js --headless --browser chrome || (npm run posttest && exit 1))"
+    "follo": "npm run pretest && npx cypress run --record --key 7592eab4-ff2a-417d-a758-8ed8b8de5908 --spec cypress/integration/com.hopin.test/hopin.js --headless --browser chrome || npm run posttest && exit 1"
   },
   "author": "",
   "license": "ISC",

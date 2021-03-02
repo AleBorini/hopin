@@ -10,7 +10,7 @@ import "cypress-iframe"
  *
  */
 
-describe('Clean Suite', function () {
+describe('Hopin Suite', function () {
 
   /**
    * @Class Hopin
