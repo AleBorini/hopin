@@ -17,32 +17,16 @@ describe('Clean Suite', function () {
    * @Description Login test hopin.com
    */
 
-  it('Premade Team Delete All', function () {
+  it('Login Test', function () {
 
-    cy.loginAuth(Cypress.env("url"), Cypress.env("frontend_client_id"),
-        Cypress.env("frontend_client_secret"), Cypress.env("api_url"),
-        Cypress.env("automation_test_secret"),
-        Cypress.env("email"), Cypress.env("user_password_autotest"));
-    cy.loginValidate();
-    cy.get('[ng-click="vm.openCloseSection(\'teams\')"]').click();
-
-    cy.get('[name="team.name"]')
-    .each(($el) => {
-      if ($el.text() === 'TeamTest') {
-        cy.log("There are no teams to delete here")
-      } else {
-        cy.wrap($el).click();
-        cy.get('.subpage-nav__list__link > span').click();
-        cy.get('.users-list > :nth-child(1)').scrollIntoView()
-        .should('be.visible');
-        cy.elementExistClick('[ng-click*="vm.remove"]');
-        cy.get('.text-right > .btn').click();
-        cy.get('[ng-click="close()"]').click();
-        cy.url().should('not.include', 'teams');
-        cy.log("One team has been deleted")
-        cy.wait(1500);
-      }
-    })
+    cy.visit(Cypress.env('url'));
+    cy.get('[class*="nav_link hidden"]').click();
+    cy.get('#user_email').type(Cypress.env('email'));
+    cy.get('#user_password').type(Cypress.env('password'));
+    cy.get('[data-smoke-test-id="signin_button"]').click();
+    cy.get('.flash > p').should('be.visible')
+    .text().should('equal', "Signed in successfully")
+    //cy.wait(2000)
 
   })
 

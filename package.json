@@ -12,11 +12,10 @@
     "posttest": "npm run combine-reports && npm run generate-report",
     "follo": "npm run pretest && (npx cypress run --record --key 7592eab4-ff2a-417d-a758-8ed8b8de5908 --spec cypress/integration/com.hopin.test/hopin.js --headless --browser chrome || (npm run posttest && exit 1))"
   },
-
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^6.2.1",
+    "cypress": "^6.6.0",
     "cypress-iframe": "1.0.x",
     "cypress-multi-reporters": "1.4.x",
     "cypress-xpath": "1.6.x",
@@ -29,7 +28,6 @@
     "mochawesome-merge": "4.2.x",
     "typescript": "4.0.x"
   },
-
   "dependencies": {
     "buffer": "^6.0.2",
     "cypress-commands": "^1.1.0"
