@@ -7,17 +7,17 @@
   "viewportWidth": 1900,
   "chromeWebSecurity": false,
   "videoCompression": 0,
-  "supportFile": "./cypress/support/com.faceit.index/index.js",
+  "supportFile": "./cypress/support/com.hopin.index/index.js",
   "modifyObstructiveCode": false,
   "retries": 1,
-  "ignoreTestFiles": "**/com.faceit.test/ignoredTestFiles/*.js",
+  "ignoreTestFiles": "**/com.hopin.test/ignoredTestFiles/*.js",
   "watchForFileChanges":false,
 
 
   "env": {
 
-    "name": "AutoFaceit5",
-    "email": "autofaceit5@faceit.com"
+    "name": "Follo",
+    "email": "borini.ale@gmail.com"
 
   },
   "reporter": "cypress-multi-reporters",
@@ -25,6 +25,5 @@
     "configFile": "reporter-config.json"
   },
 
-  "projectId": "h5d2c6"
-
+  "projectId": "tyf5ts"
 }
