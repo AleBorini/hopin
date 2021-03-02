@@ -14,20 +14,17 @@ describe('Hopin Suite', function () {
 
   /**
    * @Class Hopin
-   * @Description Login test hopin.com
+   * @Description Login/Logout test hopin.com
    */
 
-  it('Login Test', function () {
+  /*it('Login/Logout Test', function () {
+    cy.login(Cypress.env('url'), Cypress.env('email'), Cypress.env('password'))
+    cy.logout();
+  })*/
 
-    cy.visit(Cypress.env('url'));
-    cy.get('[class*="nav_link hidden"]').click();
-    cy.get('#user_email').type(Cypress.env('email'));
-    cy.get('#user_password').type(Cypress.env('password'));
-    cy.get('[data-smoke-test-id="signin_button"]').click();
-    cy.get('.flash > p').should('be.visible')
-    .text().should('equal', "Signed in successfully")
-    //cy.wait(2000)
-
+  it('Login/Logout Test', function () {
+    cy.login(Cypress.env('url'), Cypress.env('email'), Cypress.env('password'))
+    cy.wait(3000)
   })
 
 })
