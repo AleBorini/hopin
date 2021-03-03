@@ -1,5 +1,6 @@
 require('cypress-xpath');
 require('cypress-commands');
+require('cypress-dark')
 
 
 /// <reference path="../support/index.d.ts" />

@@ -9,7 +9,7 @@
   "videoCompression": 0,
   "supportFile": "./cypress/support/com.hopin.index/index.js",
   "modifyObstructiveCode": false,
-  "retries": 1,
+  "retries": 0,
   "ignoreTestFiles": "**/com.hopin.test/ignoredTestFiles/*.js",
   "watchForFileChanges":false,
   "baseUrl": "https://hopin.com/",
