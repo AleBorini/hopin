@@ -17,6 +17,7 @@
   "devDependencies": {
     "cypress": "^6.6.0",
     "cypress-dark": "^1.7.14",
+    "cypress-file-upload": "^5.0.2",
     "cypress-iframe": "1.0.x",
     "cypress-multi-reporters": "1.4.x",
     "cypress-xpath": "1.6.x",

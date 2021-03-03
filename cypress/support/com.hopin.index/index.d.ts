@@ -5,5 +5,8 @@ declare namespace Cypress {
         logout(): Chainable<Element>;
 
 
+        //Utility commands
+        uploadImage(selector:String, image:String, filename:String): Chainable<Element>;
+
     }
 }
