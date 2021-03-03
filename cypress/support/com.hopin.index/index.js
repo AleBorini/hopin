@@ -1,16 +1,13 @@
 require('cypress-xpath');
 require('cypress-commands');
+require('cypress-dark')
 
 
 /// <reference path="../support/index.d.ts" />
 
 import "cypress-iframe"
-import "../com.faceit.commands/LoginCommands"
-import "../com.faceit.commands/HubCommands"
-import "../com.faceit.commands/ChampCommands"
-import "../com.faceit.commands/TeamCommands"
-import "../com.faceit.commands/UtilityCommands"
-import "../com.faceit.commands/ClanCommands"
+import "../com.hopin.commands/LoginCommands"
+
 
 Cypress.on('uncaught:exception', () => {
     return false
