@@ -13,14 +13,20 @@ import "cypress-iframe"
 describe('Hopin Suite', function () {
 
   /**
-   * @Class Hopin
+   * @Class Login/Logout Test
    * @Description Login/Logout test hopin.com
    */
 
-  /*it('Login/Logout Test', function () {
+  it('Login/Logout Test', function () {
     cy.login(Cypress.env('url'), Cypress.env('email'), Cypress.env('password'))
     cy.logout();
-  })*/
+  })
+
+
+  /**
+   * @Class Create random event test
+   * @Description Create random event test
+   */
 
   it('Create random event test', function () {
     const eventName = Math.random().toString(36).substr(2, 10);
@@ -74,6 +80,33 @@ describe('Hopin Suite', function () {
     //cy.on('window:confirm', () => true);
     cy.contains(eventName).should('not.exist');
 
+  })
+
+  /**
+   * @Class Create random event test
+   * @Description Create random event test
+   */
+
+  it('Create an organization test', function () {
+    const orgData = Math.random().toString(36).substr(2, 10);
+
+    cy.login(Cypress.env('url'), Cypress.env('email'), Cypress.env('password'))
+    cy.get('[class="dashboard-navigation_item "]').eq(-1).click();
+    cy.get('#organization_name').type(orgData);
+    cy.get('#organization_email').type(orgData + "@google.com");
+    cy.get('#organization_about').type(orgData);
+
+    cy.get('[class="option_content"]')
+    .each(($el) => {
+        cy.wrap($el).click()
+    })
+
+    cy.get('#organization_picture').attachFile('logo.png');
+    cy.get('#organization_cover_image').attachFile('cover.png');
+
+
+    //Not gonna save I still dont know if I can delete and limitations
+    //cy.get('.-full').click();
   })
 
 })

@@ -5,8 +5,10 @@ require('cypress-dark')
 
 /// <reference path="../support/index.d.ts" />
 
-import "cypress-iframe"
-import "../com.hopin.commands/LoginCommands"
+import "cypress-iframe";
+import "../com.hopin.commands/loginCommands";
+import 'cypress-file-upload';
+
 
 
 Cypress.on('uncaught:exception', () => {
@@ -31,7 +33,7 @@ beforeEach(function () {
 })
 
 
-// Import LoginCommands.js using ES2015 syntax:
+// Import loginCommands.js using ES2015 syntax:
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 // This example support/index.js is processed and
