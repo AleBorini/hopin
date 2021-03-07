@@ -613,7 +613,7 @@ exports.publish = (taffyData, opts, tutorials) => {
     files = find({kind: 'file'});
     packages = find({kind: 'package'});
 
-    generate('Faceit E2E Automation Testing',
+    generate('Hopin.com E2E Automation project',
         packages.concat(
             [{
                 kind: 'mainpage',
