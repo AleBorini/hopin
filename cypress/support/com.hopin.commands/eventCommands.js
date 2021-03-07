@@ -8,10 +8,9 @@
 
 /**
  * @function eventCreate()
- * @description login the user via auth end point
- * @param {string} url - env URL
- * @param {string} email - user email
- * @param {string} password - password
+ * @description command to create a simple event using default parameters and default
+ * random string name
+ * @param {string} eventName - chosen event name
  */
 
 
@@ -42,14 +41,40 @@ Cypress.Commands.add("eventCreate", (eventName) => {
 
 })
 
-Cypress.Commands.add("eventDelete", (eventName) => {
+/**
+ * @function eventCreate()
+ * @description command to delete the last created event after creation.
+ * @param {string} eventName - chosen event name
+ */
 
+Cypress.Commands.add("eventDelete", (eventName) => {
   cy.get('[data-original-title="Back to dashboard"]').click();
   cy.get('[data-toggle-dropdown*="event-dropdown"]').eq(0).click();
   cy.get('[data-method="delete"]').eq(0).click();
   //cy.on('window:confirm', () => true);
   cy.contains(eventName).should('not.exist');
 
+})
+
+/**
+ * @function sponsorCreate()
+ * @description command to create a new sponsor for the event.
+ * Data available in fixtures folder.
+ * @param {string} sponsorName - chosen sponsor name
+ * @param {string} sponsorWebsite - chosen sponsor website url
+ * @param {string} sponsorLogo - chosen sponsor logo file path
+ */
+
+Cypress.Commands.add("sponsorCreate", (sponsorName, sponsorWebsite, sponsorLogo)=> {
+  cy.get('[data-original-title*="sponsors"]').click();
+  cy.get('[data-testid="empty-button"]').click();
+  cy.get('#sponsor_name').type(sponsorName);
+  cy.get('#sponsor_website').type(sponsorWebsite);
+  cy.get('#sponsor_logo').attachFile(sponsorLogo);
+  cy.get("[name='button']").click();
+  cy.contains(sponsorName).should('be.visible');
+  cy.contains(sponsorWebsite).should('be.visible');
+  cy.get('[src*="sponsors/logos"]').should('be.visible');
 
 })
 

@@ -23,9 +23,7 @@ before(function () {
 
 
 beforeEach(function () {
-    cy.fixture('properties.json').then(function (data) {
-        this.data = data;
-    })
+    cy.fixture('properties.json').as('data')
 })
 
 

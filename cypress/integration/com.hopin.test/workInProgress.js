@@ -37,14 +37,21 @@ describe('WIP Suite', function () {
 
   })*/
 
-  it('Create random event test', function () {
-    const eventName = Math.random().toString(36).substr(2, 10);
+  it('Create sposor event', function () {
+      const eventName = Math.random().toString(36).substr(2, 10);
 
-    cy.login(Cypress.env('url'), Cypress.env('email'),
-        Cypress.env('password'))
+      cy.login(Cypress.env('url'), Cypress.env('email'),
+          Cypress.env('password'))
 
-    cy.eventCreate(eventName);
-    cy.eventDelete(eventName)
+      cy.eventCreate(eventName);
+      cy.sponsorCreate(this.data.sponsor_name, this.data.sponsor_website, 'logo.png');
+
+      cy.get('[data-original-title*="sign up"]').click();
+
+
+
+
+      cy.eventDelete(eventName)
   })
 
 })

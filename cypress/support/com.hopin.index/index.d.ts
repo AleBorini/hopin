@@ -8,6 +8,7 @@ declare namespace Cypress {
         //Event commands
         eventCreate(eventName:String): Chainable<Element>;
         eventDelete(eventName:String): Chainable<Element>;
+        sponsorCreate(sponsorName:String,sponsorWebsite:String, sponsorLogo:String): Chainable<Element>;
 
     }
 }
