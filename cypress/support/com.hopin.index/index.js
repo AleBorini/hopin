@@ -7,8 +7,8 @@ require('cypress-dark')
 
 import "cypress-iframe";
 import "../com.hopin.commands/loginCommands";
+import "../com.hopin.commands/eventCommands";
 import 'cypress-file-upload';
-
 
 
 Cypress.on('uncaught:exception', () => {
@@ -17,19 +17,12 @@ Cypress.on('uncaught:exception', () => {
 
 
 before(function () {
-    cy.fixture('properties.json').as('data')
-    Cypress.Server.defaults({
-        ignore: (xhr) => {
-            return true;
-        }
-    })
+
 })
 
 
 beforeEach(function () {
-    cy.fixture('properties.json').then(function (data) {
-        this.data = data;
-    })
+    cy.fixture('properties.json').as('data')
 })
 
 

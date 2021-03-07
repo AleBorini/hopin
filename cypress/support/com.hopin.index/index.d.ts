@@ -5,8 +5,10 @@ declare namespace Cypress {
         logout(): Chainable<Element>;
 
 
-        //Utility commands
-        uploadImage(selector:String, image:String, filename:String): Chainable<Element>;
+        //Event commands
+        eventCreate(eventName:String): Chainable<Element>;
+        eventDelete(eventName:String): Chainable<Element>;
+        sponsorCreate(sponsorName:String,sponsorWebsite:String, sponsorLogo:String): Chainable<Element>;
 
     }
 }

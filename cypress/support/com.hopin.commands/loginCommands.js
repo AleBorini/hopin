@@ -8,7 +8,7 @@
 
 /**
  * @function login()
- * @description login the user via auth end point
+ * @description User login command via FE
  * @param {string} url - env URL
  * @param {string} email - user email
  * @param {string} password - password
@@ -28,6 +28,13 @@ Cypress.Commands.add("login", (url, email, password) => {
 
 })
 
+/**
+ * @function logout()
+ * @description User logout command via FE
+ * @param {string} url - env URL
+ * @param {string} email - user email
+ * @param {string} password - password
+ */
 
 Cypress.Commands.add("logout", () => {
   cy.get('.avatar').click();
