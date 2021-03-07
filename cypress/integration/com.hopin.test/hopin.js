@@ -15,7 +15,7 @@ describe('Hopin Suite', function () {
 
 
   /**
-   * @Class Login/Logout Test
+   * @Class Login/Logout test
    * @Description Login/Logout test hopin.com.
    * Contains commands from "../com.hopin.commands/loginCommands"
    * Data loaded from environment variables.
@@ -29,7 +29,7 @@ describe('Hopin Suite', function () {
 
 
   /**
-   * @Class Create random event test
+   * @Class Contact sales team test
    * @Description Check element on contact sales team page and compile form.
    * Data loaded from environment variable.
    */
@@ -71,7 +71,7 @@ describe('Hopin Suite', function () {
 
 
   /**
-   * @Class Create organization
+   * @Class Create organization test
    * @Description Create an organization and upload
    * profile and cover images.
    * Images loaded from fixtures.
@@ -101,7 +101,7 @@ describe('Hopin Suite', function () {
 
 
   /**
-   * @Class Create event sponsor
+   * @Class Create event sponsor test
    * @Description The test creates a new event, a new sponsor and
    * then add tne sponsor to the event registration page.
    *
@@ -152,7 +152,7 @@ describe('Hopin Suite', function () {
 
 
   /**
-   * @Class Create random event
+   * @Class Create random event test
    * @Description The test creates a new event selecting completely random data.
    * Pretty useless but fun to write.
    *

@@ -42,8 +42,8 @@ Cypress.Commands.add("eventCreate", (eventName) => {
 })
 
 /**
- * @function eventCreate()
- * @description command to delete the last created event after creation.
+ * @function eventDelete()
+ * @description command to delete the last event after creation.
  * @param {string} eventName - chosen event name
  */
 

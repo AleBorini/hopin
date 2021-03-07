@@ -3,20 +3,8 @@
 import "cypress-iframe"
 import {LoremIpsum} from "lorem-ipsum";
 
-/**
- * @module Hopin
- * @description This test suite will contains all the tests for the hopin interview.
- * @author Alessandro Follo Borini
- * @see <a href="https://github.com/AleBorini/privateRepo"> Git repository</a>
- *
- */
 
 describe('WIP Suite', function () {
-
-  /**
-   * @Class Hopin
-   * @Description Work in progress test hopin.com
-   */
 
   /*it('WIP', function () {
 
