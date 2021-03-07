@@ -9,7 +9,7 @@
   "videoCompression": 0,
   "supportFile": "./cypress/support/com.hopin.index/index.js",
   "modifyObstructiveCode": false,
-  "retries": 0,
+  "retries": 1,
   "ignoreTestFiles": "**/com.hopin.test/ignoredTestFiles/*.js",
   "watchForFileChanges":false,
   "baseUrl": "https://hopin.com/",
@@ -21,7 +21,6 @@
     "email": "borini.ale@gmail.com",
     "company": "Follo",
     "job": "QA Engineer"
-
   },
 
   "reporter": "cypress-multi-reporters",
