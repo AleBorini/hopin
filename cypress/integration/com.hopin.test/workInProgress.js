@@ -1,6 +1,7 @@
 /// <reference types="Cypress" />
 
 import "cypress-iframe"
+import {LoremIpsum} from "lorem-ipsum";
 
 /**
  * @module Hopin
@@ -36,23 +37,6 @@ describe('WIP Suite', function () {
 
 
   })*/
-
-  it('Create sposor event', function () {
-      const eventName = Math.random().toString(36).substr(2, 10);
-
-      cy.login(Cypress.env('url'), Cypress.env('email'),
-          Cypress.env('password'))
-
-      cy.eventCreate(eventName);
-      cy.sponsorCreate(this.data.sponsor_name, this.data.sponsor_website, 'logo.png');
-
-      cy.get('[data-original-title*="sign up"]').click();
-
-
-
-
-      cy.eventDelete(eventName)
-  })
 
 })
 

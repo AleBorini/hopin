@@ -51,8 +51,10 @@ Cypress.Commands.add("eventDelete", (eventName) => {
   cy.get('[data-original-title="Back to dashboard"]').click();
   cy.get('[data-toggle-dropdown*="event-dropdown"]').eq(0).click();
   cy.get('[data-method="delete"]').eq(0).click();
-  //cy.on('window:confirm', () => true);
+  cy.on('window:confirm', () => true);
   cy.contains(eventName).should('not.exist');
+  cy.get('.flash > p').should('be.visible')
+  .text().should('equal', "Event removed.");
 
 })
 
@@ -72,10 +74,11 @@ Cypress.Commands.add("sponsorCreate", (sponsorName, sponsorWebsite, sponsorLogo)
   cy.get('#sponsor_website').type(sponsorWebsite);
   cy.get('#sponsor_logo').attachFile(sponsorLogo);
   cy.get("[name='button']").click();
+  cy.get('.flash > p').should('be.visible')
+  .text().should('equal', "Sponsor Created!");
   cy.contains(sponsorName).should('be.visible');
   cy.contains(sponsorWebsite).should('be.visible');
   cy.get('[src*="sponsors/logos"]').should('be.visible');
-
 })
 
 

@@ -11,7 +11,6 @@ import "../com.hopin.commands/eventCommands";
 import 'cypress-file-upload';
 
 
-
 Cypress.on('uncaught:exception', () => {
     return false
 })
