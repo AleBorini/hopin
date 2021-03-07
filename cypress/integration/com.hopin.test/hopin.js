@@ -14,77 +14,61 @@ describe('Hopin Suite', function () {
 
   /**
    * @Class Login/Logout Test
-   * @Description Login/Logout test hopin.com
+   * @Description Login/Logout test hopin.com.
+   * Contains commands from "../com.hopin.commands/loginCommands"
+   * Data loaded from environment variables.
    */
 
   it('Login/Logout Test', function () {
     cy.login(Cypress.env('url'), Cypress.env('email'), Cypress.env('password'))
     cy.logout();
-  })
 
+  })
 
   /**
    * @Class Create random event test
-   * @Description Create random event test
+   * @Description Check element on contact sales team page and compile form.
+   * Data loaded from environment variable.
    */
 
-  it('Create random event test', function () {
-    const eventName = Math.random().toString(36).substr(2, 10);
-    cy.login(Cypress.env('url'), Cypress.env('email'),
-        Cypress.env('password'))
-    cy.get('[class="dashboard-navigation_item "]').eq(0).click();
-    cy.get('[data-testid="tab-panel"]').eq(1).click();
-    cy.get('[class="button"]').click();
-    cy.get('#name').type(eventName);
-    cy.get('#start').click();
+  it('Contact sales team', function () {
 
-    cy.get('[class="nice-dates-day -wide"]')
-    .eq(Math.floor(Math.random() * 24))
-    .click();
+    cy.visit(Cypress.env('url'));
+    cy.get('.mr-2').click();
 
-    cy.get('[class="nice-dates-day -wide"]')
-    .eq(Math.floor(Math.random() * 2))
-    .click();
+    cy.get('[class*="section-title"]').should('be.visible');
+    cy.get('[class*="contact-sales-text"]').should('be.visible');
 
-    const time = Math.floor(Math.random() * 23) + ":00";
-    cy.get('[aria-label="Start time"]').clear().type(time);
-    cy.get('[aria-label="End time"]').clear().type(time);
-    cy.log('Starting/End time selected as | ' + time)
+    cy.get('[data-animation="cross"]')
+    .should('have.attr', 'data-delay', '4000')
+    .should('have.attr', 'data-autoplay', '1')
+    .should('have.attr', 'data-duration', '500')
+    cy.get('[class*="slider-arrow"]').should('be.visible');
 
-    cy.get('#timezone > option').eq(Math.floor(Math.random() * 150)).then(
+    cy.get('[data-name="first_name"]').type(Cypress.env('name'));
+    cy.get('[data-name="last_name"]').type(Cypress.env('lastName'));
+
+    cy.get('[data-name="00N4W00000MF13q"] > option').eq(
+        Math.floor(Math.random() * 3) + 1).then(
         ($el) => {
-          cy.get('#timezone').select($el.get(0).innerText);
-          cy.log("Time zone selected as | " + $el.get(0).innerText)
+          cy.get('[data-name="00N4W00000MF13q"]').select($el.get(0).innerText);
+          cy.log("Region selected as | " + $el.get(0).innerText)
         })
 
-    cy.get('[class*="option_content "]').each(randomElement => {
-      cy.wrap(randomElement).click();
-    });
-
-    for(let i = 0; i < 5; i++){
-    cy.get('[class*="option_content "]').eq(Math.floor(Math.random() * 3)).click();
-    }
-
-    for(let i = 0; i < 5; i++){
-    cy.get('[class="option_content"]').eq(Math.floor(Math.random() * 6)).click();
-    }
-
-
-    cy.get('.button').should('be.visible').click({force:true});
-    cy.url().should('contain', eventName + '/dashboard');
-    cy.get('[class*="EventTitle"]').text().should('equal', eventName);
-
-    cy.get('[data-original-title="Back to dashboard"]').click();
-    cy.get('[data-toggle-dropdown*="event-dropdown"]').eq(0).click();
-    cy.get('[data-method="delete"]').eq(0).click();
-    //cy.on('window:confirm', () => true);
-    cy.contains(eventName).should('not.exist');
+    cy.get('[data-name="company"]').type(Cypress.env('company'));
+    cy.get('[data-name="title"]').type(Cypress.env('job'));
+    cy.get('[data-name="email"]').type(Cypress.env('email'));
+    cy.get('[class*="custom-radio-item"]').eq(0).click();
+    cy.get('[class*="custom-checkbox-item"]').click();
+    //cy.get('#submitButton').click();
 
   })
 
   /**
-   * @Class Create random event test
-   * @Description Create random event test
+   * @Class Create organization
+   * @Description Create an organization and upload
+   * profile and cover images.
+   * Images loaded from fixtures.
    */
 
   it('Create an organization test', function () {
@@ -98,7 +82,7 @@ describe('Hopin Suite', function () {
 
     cy.get('[class="option_content"]')
     .each(($el) => {
-        cy.wrap($el).click()
+      cy.wrap($el).click()
     })
 
     cy.get('#organization_picture').attachFile('logo.png');
@@ -108,6 +92,14 @@ describe('Hopin Suite', function () {
     //Not gonna save I still dont know if I can delete and limitations
     //cy.get('.-full').click();
   })
+
+  /**
+   * @Class Create random event test
+   * @Description Create a completely random event and delete it. Pretty useless but fun.
+   */
+
+
+
 
 })
 

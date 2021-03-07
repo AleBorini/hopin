@@ -14,13 +14,37 @@ describe('WIP Suite', function () {
 
   /**
    * @Class Hopin
-   * @Description Login/Logout test hopin.com
+   * @Description Work in progress test hopin.com
    */
 
-  it('WIP', function () {
+  /*it('WIP', function () {
 
     cy.login(Cypress.env('url'), Cypress.env('email'), Cypress.env('password'))
+    cy.contains('Find an event').click();
+    cy.get('[role="combobox"]').type('Google');
+    cy.get("[aria-label='search for events']").click();
+    cy.get('[aria-pressed="false"]').eq(0).click();
+    cy.get("[for='price-filter-type-free']").click();
+    cy.get("[class*='select-styles']").select('Any currency');
+    cy.get('[for="events-only"]').click();
+    cy.get('[class*="component-styles__Label"]').eq(0).click();
+    cy.get('[class*="TitleLink"]').eq(1).click();
+    cy.get('#event_registration_fields_Job\ Title').type(Cypress.env('Job'));
+    cy.get('#event_registration_fields_Company\ Name').type(Cypress.env('name'));
+    cy.get('#event_registration_fields_Company\ Name').type(Cypress.env('email'));
+    cy.wait(2000);
 
+
+  })*/
+
+  it('Create random event test', function () {
+    const eventName = Math.random().toString(36).substr(2, 10);
+
+    cy.login(Cypress.env('url'), Cypress.env('email'),
+        Cypress.env('password'))
+
+    cy.eventCreate(eventName);
+    cy.eventDelete(eventName)
   })
 
 })

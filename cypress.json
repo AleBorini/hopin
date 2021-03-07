@@ -16,10 +16,14 @@
 
   "env": {
     "url":"https://hopin.com/",
-    "name": "Follo",
-    "email": "borini.ale@gmail.com"
+    "name": "Alessandro",
+    "lastName": "Borini",
+    "email": "borini.ale@gmail.com",
+    "company": "Follo",
+    "job": "QA Engineer"
 
   },
+
   "reporter": "cypress-multi-reporters",
   "reporterOptions": {
     "configFile": "reporter-config.json"
